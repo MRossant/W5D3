@@ -85,7 +85,8 @@ VALUES
 INSERT INTO
     question_likes (users_id, questions_id)
 VALUES
-    (1, 1),
-    (2, 1);
+    ((SELECT id FROM users WHERE fname = 'Mickey'), (SELECT id FROM questions WHERE title = 'Is the World flat?')),
+    ((SELECT id FROM users WHERE fname = 'Matteo'), (SELECT id FROM questions WHERE title = 'Is the World flat?'));
+
 
 
