@@ -1,6 +1,16 @@
 require_relative "questions_database"
+require "byebug"
 
 class User < QuestionsDatabase
+    attr_reader :id
+    attr_accessor :fname, :lname, 
+    
+    def initialize(options)
+        # @id = options['id']
+        # @fname = options['fname']
+        # @lname = options['lname']
+        @name = name
+    end
 
     def self.all 
         data = QuestionsDatabase.instance.execute("SELECT * FROM users") 
@@ -10,11 +20,11 @@ class User < QuestionsDatabase
     def self.find_by_id(id)
         user = QuestionsDatabase.instance.execute(<<-SQL, id)
         SELECT
-          *
+            *
         FROM
-        users
+            users
         WHERE 
-        id = ?
+            id = ?
         SQL
         return nil unless user.length > 0 #return nil if we dont have a table i.e arr.empty?
         User.new(user) #returns arr representing user data
@@ -23,24 +33,14 @@ class User < QuestionsDatabase
     def self.find_by_name(fname, lname)
         user = QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
         SELECT
-         *        
+            *        
         FROM
-        users
+            users
         WHERE 
-        fname = ? AND lname = ?
+            fname = ? AND lname = ?
         SQL
         return nil unless user.length > 0
         User.new(user)
-
-    end
-
-    attr_accessor :fname, :lname, 
-    # attr_reader :id
-
-    def initialize(options)
-        @id = options['id']
-        @fname = options['fname']
-        @lname = options['lname']
     end
 
 
