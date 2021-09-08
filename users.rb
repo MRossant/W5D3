@@ -1,15 +1,18 @@
 require_relative "questions_database"
 require "byebug"
 
-class User < QuestionsDatabase
+class User 
     attr_reader :id
-    attr_accessor :fname, :lname, 
+    attr_accessor :fname, :lname
     
-    def initialize(options)
-        # @id = options['id']
-        # @fname = options['fname']
-        # @lname = options['lname']
-        @name = name
+    # def initialize(options = {})
+    #     @id = options['id']
+    #     @fname = options['fname']
+    #     @lname = options['lname']
+   
+    # end
+    def initialize(options = {})
+        @id, @fname, @lname = options.values_at('id', 'fname', 'lname')
     end
 
     def self.all 
